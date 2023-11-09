@@ -1,0 +1,29 @@
+{ % extends "bootstrap/base.html" %}
+
+{% block head %}
+   {{ super()}}
+    <title>
+        { % block title % } TODOlIST | { % endblock % }
+    </title>
+    <link rel="stylesheet" href="">
+{ % endblock }
+
+{% block body_content %}
+    {  % block navbar %}
+    { % include "navbar.html" }
+    { % endblock % }
+
+    { % for message in get_flashed_message() %}
+     <div  class="alert alert-success alert-dismissible">
+        <button type="button"
+                data-dismiss="alert"
+                class="close">&times;</button>
+            {{ message }}
+     </div>
+    {% endfor %}
+
+    { % block content %}{ % endblock % }
+    { % block scripts %}
+        {{ super() }}
+    {% endblock %}
+ { % endblock % }

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{ % block title % }
+    {{ super ()}}
+    Welcome
+{ % endblock % }
+
+{ % block content %}
+{% if username %}
+<h1>Welcome, {{username}}, to the site!</h1>
+{ % endif % }
+{% if user_ip %}
+ <h2>Hello world FLASK!, Tu IP es {{ context.user_ip}}</h2>
+ {% else %}
+    <a href="{{ url_for('index') }}">Ir a inicio</a>
+    {% endif %}
+
+<div class="container">
+ <form action="{{url_for(hello)}}"  method="post"> 
+    {{ wtf.quick_form(login_form) }}
+ </form>
+
+</div>
+
+<div class="container2">
+    <h2>Create a New TODO</h2>
+       {{ wtf.quick_form(todo_form) }}
+   </div>
+
+<ul>
+    {% for todo in todos %}
+        {{ macros.render_todo(todo, delete_form) }}
+     {% endfor %}
+</ul>
+
+{ % endblock % }
